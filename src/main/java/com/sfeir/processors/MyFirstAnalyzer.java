@@ -1,5 +1,6 @@
 package com.sfeir.processors;
 
+import org.apache.log4j.Level;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtCatch;
 
@@ -9,7 +10,9 @@ import spoon.reflect.code.CtCatch;
 public class MyFirstAnalyzer extends AbstractProcessor<CtCatch> {
 
     public void process(CtCatch element) {
-        //NYI
+        if (element.getBody().getStatements().size() == 0) {
+            getFactory().getEnvironment().report(this, Level.ERROR, element, "empty catch clause");
+        }
     }
 
 }
