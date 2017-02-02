@@ -20,3 +20,12 @@ mkdirs:
 	@mkdir -p target
 
 init: mkdirs install
+
+spoon2: install
+	@$(spoon-base) -p com.sfeir.processors.MyFirstProcessor
+
+test:
+	@javac spooned/com/sfeir/badcalculator/*.java -d target
+	@java -classpath target com.sfeir.badcalculator.CalculatorMain
+
+spoon2-test: spoon2 test
